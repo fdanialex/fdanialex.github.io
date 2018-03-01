@@ -1,5 +1,5 @@
 var Shaker = Class.extend({
-	
+
 	init: function() {
 	    this.settings = {
 		meshX: 32,
@@ -24,7 +24,7 @@ var Shaker = Class.extend({
 	    this.timestart = 0;
 	    this.count = 0;
 	    this.fpsstart = 0;
- 
+
 	    this.renderer = new Renderer(this.settings.windowWidth, this.settings.windowHeight,
 					 this.settings.meshX, this.settings.meshY,
 					 this.settings.textureSize, this.music);
@@ -33,21 +33,21 @@ var Shaker = Class.extend({
 	    this.presetNames = [];
 	    for (var presetName in Presets) {
 		this.presetNames.push(presetName);
-		Presets[presetName] = new MilkdropPreset(presetName, Presets[presetName], 
+		Presets[presetName] = new MilkdropPreset(presetName, Presets[presetName],
 							 this.settings.meshX, this.settings.meshY);
 	    }
 
-	    this.presetPos = 0;
+	    this.presetPos = 1;
 	    this.activePreset = this.loadPreset();
 	    Renderer.SetPipeline(this.activePreset.pipeline());
 
 	    this.matcher = new RenderItemMatcher();
 	    this.merger = new MasterRenderItemMerge();
-	   
+
 	    this.merger.add(new ShapeMerge());
 	    this.merger.add(new BorderMerge());
 	    //this.matcher.distanceFunction().addMetric(new ShapeXYDistance());
-	    
+
 	    this.reset();
 	    this.renderer.reset(this.settings.windowWidth, this.settings.windowHeight);
 
@@ -67,7 +67,7 @@ var Shaker = Class.extend({
 	    this.timestart = 0;
 	    this.count = 0;
 	    this.fpsstart = 0;
-	    this.music.reset();	    
+	    this.music.reset();
 	},
 
 	renderFrame: function() {
@@ -103,10 +103,10 @@ var Shaker = Class.extend({
 		this.activePreset.Render(this.music, this.pipelineContext);
 		this.renderer.RenderFrame(this.activePreset.pipeline(), this.pipelineContext);
 		}*/
-	    
+
 	    this.activePreset.Render(this.music, this.pipelineContext);
 	    this.renderer.RenderFrame(this.activePreset.pipeline(), this.pipelineContext);
-	    
+
 
 	    this.count++;
 	    if (this.count % 100 == 0) {
@@ -158,7 +158,7 @@ var Shaker = Class.extend({
 
 	havePresets: function() {
 	    return this.presetPos < this.presetNames.length - 1;
-	},	    
+	},
 
 	presetSwitchedEvent: function() {
 
@@ -184,7 +184,7 @@ var Shaker = Class.extend({
 
             this.infoBox.style.backgroundColor = "rgba(255,255,255,0.5)";
 
-	    
+
         },
 
 	renderInfoBox: function() {
@@ -202,6 +202,6 @@ var Shaker = Class.extend({
 		    this.infoBoxPos = 0;
 	    }
 	}
-	
-	
+
+
     });
